@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Running Club</title>
+    <meta charset="utf-8">
+    <meta name="description" content="The Running Club" />
+    <meta name="author" content="The Running Club" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:400,700" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/screen.css" rel="stylesheet" />
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+</head>
+<body style="padding-top: 40px;;background-color: #eee;">
+<!-- Header -->
+<header class="main-header" style="background-color: #3b5998">
+    <div class="container" >
+        <div class="header-content">
+            <a href="{{ url_for('home') }}">
+                <img src="img/site-identity.png" alt="site identity" />
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container" style="padding-top: 105px; padding-bottom: 10%">
+    <form class="form-add-run" method="post" action="{{ url_for('add_run') }}">
+        <h2 class="form-add-run-heading">Add Your Run</h2>
+            <div style="width: 50%;float: left;">
+                <label for="runName">Run Name</label>
+                <input type="input" name="runName" id="runName" class="form-control" placeholder="Run Name" required="" autofocus="">
+            </div>
+            <div style="width: 50%;float: right;">
+                <label for="paceSel">Pace</label>
+                <select class="form-control" id="paceSel">
+                    <option>6 Minute/Mile</option>
+                    <option>6:30 Minute/Mile </option>
+                    <option>7 Minute/Mile</option>
+                    <option>7:30 Minute/Mile </option>
+                    <option>8 Minute/Mile</option>
+                    <option>8:30 Minute/Mile </option>
+                    <option>9 Minute/Mile</option>
+                    <option>9:30 Minute/Mile </option>
+                    <option>10 Minute/Mile</option>
+                    <option>10:30 Minute/Mile </option>
+                    <option>11 Minute/Mile</option>
+                    <option>11:30 Minute/Mile </option>
+                    <option>12 Minute/Mile</option>
+                    <option>12:30 Minute/Mile </option>
+                    <option>13 Minute/Mile</option>
+                    <option>13:30 Minute/Mile </option>
+                    <option>14 Minute/Mile</option>
+                    <option>14:30 Minute/Mile </option>
+                    <option>15+ Minute/Mile</option>
+                </select>
+            </div>
+                <div style="clear: both;"></div>
+
+        <label for="inputPassword">Location</label>
+        <input type="input" name="location" id="location" class="form-control" placeholder="123 West Street, Naperville IL, 12345" required="">
+        <div class="input-group date">
+            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+        <div style="width: 35%;float: right"><button class="btn btn-lg btn-success btn-block" type="submit">Submit</button></div>
+        <div style="clear: both;"></div>
+    </form>
+</div> <!-- /container -->
+
+
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="widget widget_links">
+                    <h5 class="widget-title">Top Locations</h5>
+                    <ul>
+                        <li><a href="#">Lorem impsum dolor</a></li>
+                        <li><a href="#">Sit amet consectetur</a></li>
+                        <li><a href="#">Adipisicing elit</a></li>
+                        <li><a href="#">Eiusmod tempor</a></li>
+                        <li><a href="#">incididunt ut labore</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="widget widget_links">
+                    <h5 class="widget-title">Featured Boats</h5>
+                    <ul>
+                        <li><a href="#">Lorem impsum dolor</a></li>
+                        <li><a href="#">Sit amet consectetur</a></li>
+                        <li><a href="#">Adipisicing elit</a></li>
+                        <li><a href="#">Eiusmod tempor</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="widget widget_social">
+                    <h5 class="widget-title">Subscribe to our newsletter</h5>
+                    <form class="subscribe-form">
+                        <div class="input-line">
+                            <input type="text" name="subscribe-email" value="" placeholder="Your email address" />
+                        </div>
+                        <button type="button" name="subscribe-submit" class="btn btn-special no-icon">Subscribe</button>
+                    </form>
+
+                    <ul>
+                        Logo Design in part <a href='http://www.freepik.com/free-vector/watercolor-running-man_715978.htm'>Designed by Freepik</a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="widget widget_links">
+                    <h5 class="widget-title">Contact us</h5>
+                    <ul>
+                        <li><a href="#">Lorem impsum dolor</a></li>
+                        <li><a href="#">Sit amet consectetur</a></li>
+                        <li><a href="#">Adipisicing elit</a></li>
+                        <li><a href="#">Eiusmod tempor</a></li>
+                        <li><a href="#">incididunt ut labore</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/jquery.js"></script>
+<script src="js/functions.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+
+</body>
+</html>
