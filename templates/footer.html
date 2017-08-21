@@ -30,9 +30,9 @@
             <div class="col-md-9">
                 <div class="widget widget_social">
                     <h5 class="widget-title">Subscribe to our newsletter</h5>
-                    <form class="subscribe-form">
+                    <form class="subscribe-form" method="GET" action="{{ url_for("sign_up") }}>
                         <div class="input-line">
-                            <input type="text" name="subscribe-email" value="" placeholder="Your email address" />
+                            <input type="text" name="destination" value="" placeholder="Your email address" />
                         </div>
                         <button type="button" name="subscribe-submit" class="btn btn-special no-icon">Subscribe</button>
                     </form>

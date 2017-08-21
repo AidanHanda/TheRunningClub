@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     first_name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
+    #club = db.Column(db.Integer, db.ForeignKey("clubs.id"))
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
@@ -38,6 +39,8 @@ class Run(db.Model):
     pace = db.Column(db.String(50))
     image_url = db.Column(db.String(512))
     time = db.Column(db.DateTime)
+    #club = db.Column(db.Integer, db.ForeignKey("clubs.id"))
+
     runners = db.relationship('User', secondary=runs_to_runners)
 
     @staticmethod
@@ -50,3 +53,9 @@ class Run(db.Model):
     def __repr__(self):
         return self.run_name
 
+# class Club(db.Model):
+#     __tablename__ = "clubs"
+#
+#     id = db.Column(db.Integer, primary_key= True)
+#     club_name = db.Column(db.Text)
+#     club_location = db.Column(db.Text)

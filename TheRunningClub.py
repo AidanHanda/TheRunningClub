@@ -20,6 +20,8 @@ def home():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
@@ -96,6 +98,27 @@ def sign_up():
     else:
         return render_template("signup.html")
 
+@app.route("/about-run")
+def about_run():
+    if request.method == "POST":
+        pass
+    else:
+        if not request.args.get("runid"):
+            return redirect(url_for("home"))
+        run = Run.query.get(request.args.get("runid"))
+        if not run:
+            return redirect(url_for("home"))
+
+        if request.args.get("rsvp") and current_user.is_authenticated:
+            if current_user in run.runners:
+                run.runners.remove(current_user)
+            else:
+                run.runners.append(current_user)
+            db.session.add(run)
+            db.session.commit()
+            return redirect(url_for("about_run", runid=request.args.get("runid")))
+
+        return render_template("about-run.html", run=run)
 
 # Static Files: Change Later
 @app.route('/js/<path:path>')

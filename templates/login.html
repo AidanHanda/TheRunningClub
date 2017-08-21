@@ -39,7 +39,7 @@
                 <input type="checkbox" name="rem" value="rem"/> Remember me
             </label>
             <label style="float: right">
-                <a href="#" style="text-decoration: underline blue">Sign Up!</a>
+                <a href="{{ url_for("sign_up") }}" style="text-decoration: underline blue">Sign Up!</a>
             </label>
             <div style="clear: both;"> </div>
             {% if request.args.get('incorrect') == "1" %}

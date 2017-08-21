@@ -14,7 +14,7 @@
 </head>
 <body class="home" id="page">
 <!-- Header -->
-<header class="main-header">
+<header class="main-header" style="background-color: rgba(128,128,128,0.5) !important;">
     <div class="container">
         <div class="header-content">
             <a href="{{ url_for('home') }}">
@@ -22,16 +22,14 @@
             </a>
 
             <nav class="site-nav">
-                <ul class="clean-list site-links">
-                    <li>
-                        <a href="{{ url_for("add_run") }}">Add a Run</a>
-                    </li>
-                </ul>
-                {% if current_user.is_authenticated %}
-                <a href="{{ url_for('logout') }}" class="btn btn-outlined">Logout {{ current_user.first_name }} {{ current_user.last_name[0] }}.</a>
+                {% if current_user.is_authenticated and current_user not in run.runners %}
+                <a href="{{ request.url }}&rsvp=true" class="btn btn-success btn-outlined">RSVP</a>
+                {% elif current_user.is_authenticated and current_user in run.runners %}
+                <a href="{{ request.url }}&rsvp=false" class="btn btn-danger btn-outlined">Cancel RSVP</a>
                 {% else %}
-                <a href="{{ url_for('login') }}" class="btn btn-outlined">Login</a>
+                <a href="{{ url_for("login", next=request.url) }}" class="btn btn-outlined">Login to RSVP</a>
                 {% endif %}
+
             </nav>
         </div>
     </div>
@@ -40,22 +38,26 @@
 <!-- Main Content -->
 <div class="content-box">
     <!-- Hero Section -->
-    <section class="section section-hero">
-        <div class="hero-box">
-            <div class="container">
+    <section class="section section-hero" style="margin-bottom: 0px !important;">
+        <div class="hero-box" style="background-image: url({{ run.image_url }}) !important; ">
+            <div class="container" style="background-color: rgba(128,128,128,0.5) !important;  border-radius: 5% !important; padding: 5% 5%">
                 <div class="hero-text align-center">
-                    <h1>Eat. Sleep. Run.</h1>
-                    <p>Next Run: <span id="clock"></span></p>
+                    <h2 style="color: white;">Name: <span style="font-style: italic">{{ run.run_name }}</span></h2>
+                    <p class="abrun">Location: <span style="font-style: italic">{{ run.location }}</span></p>
+                    <p class="abrun">Time: <span style="font-style: italic">{{ run.time }}</span></p>
+                    <ul style="color: #3b5998">
+                        Runners:
+                        {% for runner in run.runners %}
+                            <li>
+                                <span style="color: #006dcc;">{{ runner.first_name }}</span> <span style="color: whitesmoke;">{{ runner.last_name }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-
-                <form class="destinations-form" method="GET" action="{{ url_for("sign_up") }}">
-                    <div class="input-line">
-                        <input type="text" name="destination" value="" class="form-input check-value" placeholder="Email" />
-                        <button type="submit" class="form-submit btn btn-special">Sign Up</button>
-                    </div>
-                </form>
             </div>
         </div>
+    </section>
+</div>
 
 
 {% include "footer.html"%}
@@ -63,47 +65,5 @@
 <!-- Scripts -->
 <script src="js/jquery.js"></script>
 <script src="js/functions.js"></script>
-<script>
-    {% if context["upcoming_runs"]|length > 0 %}
-    var countDownDate = new Date("{{ context["upcoming_runs"][0].time }}").getTime();
-    {% else %}
-    var countDownDate = new Date().getDate();
-    {% endif %}
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-
-        // Get todays date and time
-        var now = new Date().getTime();
-
-        // Find the distance between now an the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Display the result in the element with id="demo"
-        if(minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if(seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        if(hours < 10) {
-            hours = "0" + hours;
-        }
-        document.getElementById("clock").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("clock").innerHTML = "Running!";
-        }
-    }, 1000);
-
-</script>
 </body>
 </html>

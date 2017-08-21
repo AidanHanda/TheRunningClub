@@ -89,6 +89,7 @@
 
                 {% for run in context["upcoming_runs"] %}
                     <div class="col-sm-12 col-xs-24">
+                    <a href="{{ url_for("about_run", runid = run.id) }}">
                         <div class="boat-box">
                             <div class="box-cover">
                                 <img src="{{ run.image_url }}" alt="destination image" />
@@ -107,6 +108,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 {% endfor %}
 

@@ -2563,6 +2563,7 @@ textarea:focus {
   margin-right: 12.5px;
 }
 .btn.btn-outlined {
+  text-align: center;
   color: #ffffff;
   height: 40px;
   line-height: 38px;
@@ -2789,6 +2790,13 @@ textarea:focus {
   }
   .hero-box .hero-text p {
     font-size: 20px;
+  }
+
+  .hero-box .hero-text .abrun p {
+    font-size: 18px;
+  }
+  .hero-box .hero-text h2 {
+    font-size: 30px;
   }
 }
 
