@@ -39,6 +39,7 @@ class Run(db.Model):
     pace = db.Column(db.String(50))
     image_url = db.Column(db.String(512))
     time = db.Column(db.DateTime)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     #club = db.Column(db.Integer, db.ForeignKey("clubs.id"))
 
     runners = db.relationship('User', secondary=runs_to_runners)

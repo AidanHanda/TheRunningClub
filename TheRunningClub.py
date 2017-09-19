@@ -28,7 +28,6 @@ def login():
         remember = False
         if request.form.get('rem'):
             remember = True
-        print(remember)
         user = User.query.filter_by(email=email).first()
         if user is not None and user.verify_password(password):
             login_user(user, remember=remember)
@@ -59,11 +58,42 @@ def add_run():
         run.pace = pace
         run.time = datetime.datetime.strptime(time,"%Y-%m-%d %H:%M:%S")
         run.runners.append(current_user)
+        run.owner_id = current_user.id
         db.session.add(run)
         db.session.commit()
         return redirect(url_for("home"))
     else:
         return render_template("add-run.html")
+
+
+#TODO: Finish implementing editing a run.
+# @app.route('/edit-run', methods=["GET", "POST"])
+# @login_required
+# def edit_run():
+#     if request.method == "POST":
+#         run_name = request.form.get("runName")
+#         location = request.form.get("location")
+#         image = request.form.get("image")
+#         pace = request.form.get("paceSel")
+#         time = request.form.get("time")
+#         acceptable_pace = ["6 Minute/Mile", "6:30 Minute/Mile","7 Minute/Mile","7:30 Minute/Mile","8 Minute/Mile","8:30 Minute/Mile","9 Minute/Mile","9:30 Minute/Mile","10 Minute/Mile","10:30 Minute/Mile","11 Minute/Mile","11:30 Minute/Mile","12 Minute/Mile","12:30 Minute/Mile","13 Minute/Mile","13:30 Minute/Mile","14 Minute/Mile","14:30 Minute/Mile","15+ Minute/Mile"]
+#         if not run_name or not location or not image or not (pace in acceptable_pace) or not time:
+#             return redirect(url_for("add_run", problem=1))
+#         run = Run()
+#         run.run_name = run_name
+#         run.location = location
+#         run.image_url = image
+#         run.pace = pace
+#         run.time = datetime.datetime.strptime(time,"%Y-%m-%d %H:%M:%S")
+#         run.runners.append(current_user)
+#         run.owner_id = current_user.id
+#         db.session.add(run)
+#         db.session.commit()
+#         return redirect(url_for("home"))
+#     else:
+#         return render_template("add-run.html")
+
+
 
 @app.route('/sign-up', methods=["GET", "POST"])
 def sign_up():

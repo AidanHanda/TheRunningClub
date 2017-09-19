@@ -44,7 +44,7 @@
                 <div class="hero-text align-center">
                     <h2 style="color: white;">Name: <span style="font-style: italic">{{ run.run_name }}</span></h2>
                     <p class="abrun">Location: <span style="font-style: italic">{{ run.location }}</span></p>
-                    <p class="abrun">Time: <span style="font-style: italic">{{ run.time }}</span></p>
+                    <p class="abrun">Time: <span style="font-style: italic">{{ run.time.strftime('%A, %d %b %Y %l:%M %p') }}</span></p>
                     <ul style="color: #3b5998">
                         Runners:
                         {% for runner in run.runners %}
